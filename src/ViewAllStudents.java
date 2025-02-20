@@ -25,7 +25,7 @@ public class ViewAllStudents extends CustomPanel {
         label.setFont(new Font("Arial", Font.BOLD, 24));
         add(label, BorderLayout.NORTH);
 
-        String[] columnNames = {"ID", "Name", "Gender", "Phone Number", "GPA", "Address"};
+        String[] columnNames = {"ID", "Name", "Gender", "Phone Number", "GPA", "Address", "Faculty", "Program", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         studentTable = new JTable(model);
         
@@ -91,7 +91,10 @@ public class ViewAllStudents extends CustomPanel {
                 student.getGender(),
                 student.getPhoneNumber(),
                 student.getGPA(),
-                student.getAddress()
+                student.getAddress(),
+                student.getFaculty(),
+                student.getProgram(),
+                student.getStatus()
             });
         }
     }
@@ -114,7 +117,10 @@ public class ViewAllStudents extends CustomPanel {
                 student.getGender(),
                 student.getPhoneNumber(),
                 student.getGPA(),
-                student.getAddress()
+                student.getAddress(),
+                student.getFaculty(),
+                student.getProgram(),
+                student.getStatus()
             });
         }
     }
@@ -126,8 +132,9 @@ public class ViewAllStudents extends CustomPanel {
                 String line;
                 while ((line = br.readLine()) != null) {
                     String[] data = line.split(","); 
-                    if (data.length == 6) {
-                        Student student = new Student(data[0], data[1], data[2], data[3], Float.parseFloat(data[4]), data[5]);
+                    if (data.length == 9) {
+                        Student student = new Student(data[0], data[1], data[2], data[3], Float.parseFloat(data[4]), data[5], data[6], data[7], data[8]);
+                        
                         try (RandomAccessFile raf = new RandomAccessFile(FILE_PATH, "rw")) {
                         	student.writeStudent(raf);
                         } catch (IOException e) {

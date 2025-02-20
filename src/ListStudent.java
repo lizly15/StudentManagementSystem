@@ -65,6 +65,9 @@ public class ListStudent {
                 s.setPhoneNumber(newInfo.getPhoneNumber());
                 s.setGPA(newInfo.getGPA());
                 s.setAddress(newInfo.getAddress());
+                s.setFaculty(newInfo.getFaculty());
+                s.setProgram(newInfo.getProgram());
+                s.setStatus(newInfo.getStatus());
                 clearStudents();
             	writeStudents();
                 return true; 

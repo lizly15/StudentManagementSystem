@@ -55,7 +55,7 @@ public class DeleteStudent extends CustomPanel {
         add(inputPanel, BorderLayout.NORTH);
 
         // Bảng hiển thị thông tin sinh viên
-        String[] columnNames = {"ID", "Name", "Gender", "Phone Number", "GPA", "Address"};
+        String[] columnNames = {"ID", "Name", "Gender", "Phone Number", "GPA", "Address", "Faculty", "Program", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         studentTable = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(studentTable);
@@ -78,7 +78,10 @@ public class DeleteStudent extends CustomPanel {
                     student.getGender(),
                     student.getPhoneNumber(),
                     student.getGPA(),
-                    student.getAddress()
+                    student.getAddress(),
+                    student.getFaculty(),
+                    student.getProgram(),
+                    student.getStatus()
                 });
                 return; // Kết thúc tìm kiếm sau khi tìm thấy
             }

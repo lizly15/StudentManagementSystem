@@ -2,7 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateStudent extends CustomPanel {
     private static final long serialVersionUID = 1L;
@@ -13,6 +17,7 @@ public class UpdateStudent extends CustomPanel {
     private JTextField phoneField;
     private JTextField gpaField;
     private JTextField addressField;
+    private JComboBox<String> facultyBox, programBox, statusBox;
 
     public UpdateStudent(CardLayout cardLayout, JPanel mainPanel) {
         setLayout(new GridBagLayout());
@@ -32,6 +37,9 @@ public class UpdateStudent extends CustomPanel {
         gbc.gridy += 2;
         add(new JLabel("GPA: "), gbc);
         
+        gbc.gridy += 2;
+        add(new JLabel("Faculty:"), gbc);
+        
         // Cột 1 - Nhãn
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -42,6 +50,12 @@ public class UpdateStudent extends CustomPanel {
 
         gbc.gridy += 2;
         add(new JLabel("Address:"), gbc);
+        
+        gbc.gridy += 2;
+        add(new JLabel("Program:"), gbc);
+        
+        gbc.gridy += 2;
+        add(new JLabel("Status:"), gbc);
 
         // Cột 0 - Trường nhập
         gbc.gridx = 0;
@@ -57,7 +71,11 @@ public class UpdateStudent extends CustomPanel {
         gbc.gridy += 2;
         gpaField = new JTextField(15);
         add(gpaField, gbc);
-
+        
+        gbc.gridy += 2;
+        facultyBox = new JComboBox<>(loadData("faculty.txt"));
+        add(facultyBox, gbc);
+        
         // Cột 1 - Trường nhập
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -71,6 +89,14 @@ public class UpdateStudent extends CustomPanel {
         gbc.gridy += 2;
         addressField = new JTextField(15);
         add(addressField, gbc);
+        
+        gbc.gridy += 2;
+        programBox = new JComboBox<>(loadData("program.txt"));
+        add(programBox, gbc);
+        
+        gbc.gridy += 2;
+        statusBox = new JComboBox<>(loadData("status.txt"));
+        add(statusBox, gbc);
 
         // Nút Find
         gbc.gridx = 0;
@@ -129,6 +155,9 @@ public class UpdateStudent extends CustomPanel {
                 phoneField.setText(student.getPhoneNumber());
                 gpaField.setText(String.valueOf(student.getGPA())); // Chuyển đổi sang chuỗi
                 addressField.setText(student.getAddress());
+                facultyBox.setSelectedItem(student.getFaculty());
+                programBox.setSelectedItem(student.getProgram());
+                statusBox.setSelectedItem(student.getStatus());
                 return; // Kết thúc tìm kiếm sau khi tìm thấy
             }
         }
@@ -158,8 +187,8 @@ public class UpdateStudent extends CustomPanel {
             JOptionPane.showMessageDialog(this, "GPA must be a number.");
             return;
         }
-
-        boolean updated = ls.updateStudentById(new Student(studentId, name, gender, phone, gpa, address));
+        
+        boolean updated = ls.updateStudentById(new Student(studentId, name, gender, phone, gpa, address, (String) facultyBox.getSelectedItem(), (String) programBox.getSelectedItem(), (String) statusBox.getSelectedItem()));
 
         if (updated) {
             JOptionPane.showMessageDialog(this, "Student information updated successfully.");
@@ -167,6 +196,19 @@ public class UpdateStudent extends CustomPanel {
         } else {
             JOptionPane.showMessageDialog(this, "Failed to update student information.");
         }
+    }
+    
+    private String[] loadData(String fileName) {
+        List<String> list = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                list.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list.toArray(new String[0]);
     }
 
     private void clearFields() {

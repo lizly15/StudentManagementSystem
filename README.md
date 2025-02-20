@@ -10,49 +10,31 @@ Phần mềm có 4 chức năng chính
 * Add Student: thêm một sinh viên mới
 * Update Student: chỉnh sửa thông tin sinh viên
 * Delete Student: xóa một sinh viên khỏi danh sách
-![Screenshot (102)](https://hackmd.io/_uploads/rJ_qLiXWkl.png)
+![image](https://hackmd.io/_uploads/B1u2LxH5ke.png)
 
 ## View All Student
-![Screenshot (103)](https://hackmd.io/_uploads/Skgh8im-1x.png)
+![image](https://hackmd.io/_uploads/rJc6UlSc1e.png)
 Các chức năng
 * Sắp xếp:
     * Sắp xếp tăng dần theo ID
-    ![Screenshot (104)](https://hackmd.io/_uploads/Bk0nIsQWkl.png)
+    ![image](https://hackmd.io/_uploads/ByXJPeHcyl.png)
+
     * Sắp xếp tăng dần theo GPA
-    ![Screenshot (105)](https://hackmd.io/_uploads/B1Ca8sXWyx.png)
+    ![image](https://hackmd.io/_uploads/rJhePxrcyx.png)
+
 * Import from CSV
     * Nhập đường dẫn và nhấn OK
-    ![Screenshot (106)](https://hackmd.io/_uploads/ry50IomWkg.png)
-    * Nhập dữ liệu thành công
-    ![Screenshot (108)](https://hackmd.io/_uploads/ryjkPs7-ke.png)
+    ![image](https://hackmd.io/_uploads/SJpNDeS51e.png)
+
 * Export to CSV
     * Nhập đường dẫn và nhấn OK
-    ![Screenshot (109)](https://hackmd.io/_uploads/SkU4Ps7-yl.png)
-    * Xuất dữ liệu thành công
-    ![Screenshot (110)](https://hackmd.io/_uploads/ryCEPjXb1g.png)
+    ![image](https://hackmd.io/_uploads/BJSIvgH5kx.png)
 
 ## Add Student
-* Nhập dữ liệu sinh viên
-![Screenshot (112)](https://hackmd.io/_uploads/SJ3_wjmbkx.png)
-* Nhấn Save
-![Screenshot (113)](https://hackmd.io/_uploads/B1_IvjXbyl.png)
-* Sinh viên được thêm thành công
-![Screenshot (114)](https://hackmd.io/_uploads/ryqwvjXZJe.png)
+![image](https://hackmd.io/_uploads/BJeoPlHcyl.png)
 
 ## Update Student
-* Nhập mã số sinh viên cần cập nhật và ấn Find
-![Screenshot (115)](https://hackmd.io/_uploads/SyaFvsmbye.png)
-* Thay đổi các thông tin
-![Screenshot (116)](https://hackmd.io/_uploads/HJYcPjmZkl.png)
-* Chọn Update
-![Screenshot (117)](https://hackmd.io/_uploads/B1xiviXWJx.png)
-* Thông tin sinh viên được cập nhật thành công
-![Screenshot (118)](https://hackmd.io/_uploads/rJujwj7bkg.png)
+![image](https://hackmd.io/_uploads/Hy6hwer91e.png)
 
 ## Delete Student
-* Nhập mã số sinh viên cần xóa và ấn Find, màn hình sẽ hiển thị thông tin sinh viên để bạn kiểm tra lại
-![Screenshot (118)](https://hackmd.io/_uploads/BkD3Ds7-kg.png)
-* Chọn Delete để xóa
-![Screenshot (120)](https://hackmd.io/_uploads/Sk1pPj7W1e.png)
-* Sinh viên đã được xóa thành công
-![Screenshot (121)](https://hackmd.io/_uploads/S1P6Pi7-Jg.png)
+![Screenshot (172)](https://hackmd.io/_uploads/rJGz_xr9Jl.png)
