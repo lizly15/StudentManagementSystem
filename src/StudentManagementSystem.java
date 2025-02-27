@@ -9,8 +9,8 @@ public class StudentManagementSystem extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     
-    private String[] listButtonText = {"View All Students", "Add Student", "Update Student", "Delete Student"};
-    private String[] listButtonObject = {"ViewAllScreen", "AddScreen", "UpdateScreen", "DeleteScreen"};
+    private String[] listButtonText = {"View All Students", "Add Student", "Update Student", "Delete Student", "Find Student"};
+    private String[] listButtonObject = {"ViewAllScreen", "AddScreen", "UpdateScreen", "DeleteScreen", "FindScreen"};
     JButton[] listButton = new JButton[listButtonText.length];
     CustomPanel[] listPanel = new CustomPanel[listButtonText.length];
 
@@ -36,6 +36,9 @@ public class StudentManagementSystem extends JFrame {
         
         listPanel[3] = new DeleteStudent(cardLayout, mainPanel);
         mainPanel.add(listPanel[3], "DeleteScreen");
+        
+        listPanel[4] = new FindStudent(cardLayout, mainPanel);
+        mainPanel.add(listPanel[4], "FindScreen");
 
         add(mainPanel);
     }

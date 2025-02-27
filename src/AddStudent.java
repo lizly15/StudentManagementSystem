@@ -13,8 +13,9 @@ public class AddStudent extends CustomPanel {
     private JTextField nameField;
     private JTextField genderField;
     private JTextField phoneNumberField;
-    private JTextField gpaField;
+    private JTextField yearField;
     private JTextField addressField;
+    private JTextField dobField;
     private JComboBox<String> facultyBox, programBox, statusBox;
     
     public AddStudent(CardLayout cardLayout, JPanel mainPanel) {
@@ -33,7 +34,10 @@ public class AddStudent extends CustomPanel {
         add(new JLabel("Gender: "), gbc);
 
         gbc.gridy += 2;
-        add(new JLabel("GPA: "), gbc);
+        add(new JLabel("Date of birth: "), gbc);
+        
+        gbc.gridy += 2;
+        add(new JLabel("Year:"), gbc);
         
         gbc.gridy += 2;
         add(new JLabel("Faculty:"), gbc);
@@ -67,8 +71,12 @@ public class AddStudent extends CustomPanel {
         add(genderField, gbc);
 
         gbc.gridy += 2;
-        gpaField = new JTextField(15);
-        add(gpaField, gbc);
+        dobField = new JTextField(15);
+        add(dobField, gbc);
+
+        gbc.gridy += 2;
+        yearField = new JTextField(15);
+        add(yearField, gbc);
         
         gbc.gridy += 2;
         facultyBox = new JComboBox<>(loadData("faculty.txt"));
@@ -130,7 +138,7 @@ public class AddStudent extends CustomPanel {
     private void saveStudent() {
         if (idField.getText().isEmpty() || nameField.getText().isEmpty() ||
             genderField.getText().isEmpty() || phoneNumberField.getText().isEmpty() ||
-            gpaField.getText().isEmpty() || addressField.getText().isEmpty()) {
+            yearField.getText().isEmpty() || addressField.getText().isEmpty() || dobField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -138,15 +146,16 @@ public class AddStudent extends CustomPanel {
         try (RandomAccessFile raf = new RandomAccessFile("students.dat", "rw")) {
             Student newStudent = new Student(idField.getText(), nameField.getText(),
             		genderField.getText(), phoneNumberField.getText(),
-            		Float.parseFloat(gpaField.getText()), addressField.getText(), 
-            		(String) facultyBox.getSelectedItem(), (String) programBox.getSelectedItem(), (String) statusBox.getSelectedItem());
+            		Integer.parseInt(yearField.getText()), addressField.getText(), 
+            		(String) facultyBox.getSelectedItem(), (String) programBox.getSelectedItem(), (String) statusBox.getSelectedItem(), dobField.getText());
             newStudent.writeStudent(raf);
             JOptionPane.showMessageDialog(this, "Student added successfully!");
             idField.setText(""); 
             nameField.setText(""); 
             genderField.setText(""); 
             phoneNumberField.setText(""); 
-            gpaField.setText(""); 
+            yearField.setText(""); 
+            dobField.setText(""); 
             addressField.setText(""); 
             ((CardLayout) getParent().getLayout()).show(getParent(), "MainScreen");
         } catch (IOException e) {

@@ -63,11 +63,12 @@ public class ListStudent {
                 s.setName(newInfo.getName());
                 s.setGender(newInfo.getGender());
                 s.setPhoneNumber(newInfo.getPhoneNumber());
-                s.setGPA(newInfo.getGPA());
+                s.setYear(newInfo.getYear());
                 s.setAddress(newInfo.getAddress());
                 s.setFaculty(newInfo.getFaculty());
                 s.setProgram(newInfo.getProgram());
                 s.setStatus(newInfo.getStatus());
+                s.setDob(newInfo.getDob());
                 clearStudents();
             	writeStudents();
                 return true; 

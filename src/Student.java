@@ -6,38 +6,41 @@ public class Student {
     private String name;
     private String gender;
     private String phoneNumber;
-    private float GPA;
+    private int year;
     private String address;
     private String faculty;
     private String program;
     private String status;
+    private String dob;
 
     public Student() {
     	
     }
     
-    public Student(String id, String name, String gender, String phoneNumber, float GPA, String address, 
-    		String faculty, String program, String status) {
+    public Student(String id, String name, String gender, String phoneNumber, int year, String address, 
+    		String faculty, String program, String status, String dob) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
-        this.GPA = GPA;
+        this.year = year;
         this.address = address;
         this.faculty = faculty;
         this.program = program;
         this.status = status;
+        this.dob = dob;
     }
     
     public String getId() { return id; }
     public String getName() { return name; }
     public String getGender() { return gender; }
     public String getPhoneNumber() { return phoneNumber; }
-    public float getGPA() { return GPA; }
+    public int getYear() { return year; }
     public String getAddress() { return address; }
     public String getFaculty() { return faculty; }
     public String getProgram() { return program; }
     public String getStatus() { return status; }
+    public String getDob() { return dob; }
     
     public void setName(String name) {
         this.name = name;
@@ -51,8 +54,8 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setGPA(float GPA) {
-        this.GPA = GPA;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public void setAddress(String address) {
@@ -71,27 +74,33 @@ public class Student {
         this.status = status;
     }
     
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+    
     public void show() {
     	System.out.println("Đã đọc đối tượng Student từ file: ");
         System.out.println("ID: " + id);
         System.out.println("Tên: " + name);
         System.out.println("Giới tính: " + gender);
         System.out.println("Số điện thoại: " + phoneNumber);
-        System.out.println("GPA: " + GPA);
+        System.out.println("Year: " + year);
         System.out.println("Địa chỉ: " + address);
         System.out.println("Khoa: " + faculty);
         System.out.println("Chương trình: " + program);
         System.out.println("Tình trạng sinh viên: " + status);
+        System.out.println("Ngày sinh: " + dob);
     }
 
     public void writeStudent(RandomAccessFile raf) throws IOException {
     		raf.seek(raf.length());
     		raf.writeUTF(this.id);
             raf.writeUTF(this.name);
+            raf.writeUTF(this.dob);
             raf.writeUTF(this.gender);
             raf.writeUTF(this.phoneNumber);
-            raf.writeFloat(this.GPA);
             raf.writeUTF(this.address);
+            raf.writeInt(this.year);
             raf.writeUTF(this.faculty);
             raf.writeUTF(this.program);
             raf.writeUTF(this.status);
@@ -100,10 +109,11 @@ public class Student {
     public void readStudent(RandomAccessFile raf) throws IOException {
         this.id = raf.readUTF();
         this.name = raf.readUTF();
+        this.dob = raf.readUTF();
         this.gender = raf.readUTF();
         this.phoneNumber = raf.readUTF();
-        this.GPA = raf.readFloat();
         this.address = raf.readUTF();
+        this.year = raf.readInt();
         this.faculty = raf.readUTF();
         this.program = raf.readUTF();
         this.status = raf.readUTF();

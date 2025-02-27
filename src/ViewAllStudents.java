@@ -25,7 +25,7 @@ public class ViewAllStudents extends CustomPanel {
         label.setFont(new Font("Arial", Font.BOLD, 24));
         add(label, BorderLayout.NORTH);
 
-        String[] columnNames = {"ID", "Name", "Gender", "Phone Number", "GPA", "Address", "Faculty", "Program", "Status"};
+        String[] columnNames = {"ID", "Name", "DOB", "Gender", "Phone Number", "Address", "Year", "Faculty", "Program", "Status"};
         model = new DefaultTableModel(columnNames, 0);
         studentTable = new JTable(model);
         
@@ -34,7 +34,7 @@ public class ViewAllStudents extends CustomPanel {
         JScrollPane scrollPane = new JScrollPane(studentTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        String[] sortOptions = {"Sort by ID", "Sort by GPA"};
+        String[] sortOptions = {"Sort by ID", "Sort by Name"};
         JComboBox<String> sortComboBox = new JComboBox<>(sortOptions);
         sortComboBox.addActionListener(new ActionListener() {
             @Override
@@ -88,10 +88,11 @@ public class ViewAllStudents extends CustomPanel {
             model.addRow(new Object[]{
                 student.getId(),
                 student.getName(),
+                student.getDob(),
                 student.getGender(),
                 student.getPhoneNumber(),
-                student.getGPA(),
                 student.getAddress(),
+                String.valueOf(student.getYear()),
                 student.getFaculty(),
                 student.getProgram(),
                 student.getStatus()
@@ -105,19 +106,20 @@ public class ViewAllStudents extends CustomPanel {
         
         if (criteria.equals("Sort by ID")) {
             students.sort(Comparator.comparing(Student::getId));
-        } else if (criteria.equals("Sort by GPA")) {
-            students.sort(Comparator.comparing(Student::getGPA));
+        } else if (criteria.equals("Sort by Name")) {
+            students.sort(Comparator.comparing(Student::getName));
         }
 
         model.setRowCount(0);
         for (Student student : students) {
             model.addRow(new Object[]{
-                student.getId(),
+        		student.getId(),
                 student.getName(),
+                student.getDob(),
                 student.getGender(),
                 student.getPhoneNumber(),
-                student.getGPA(),
                 student.getAddress(),
+                String.valueOf(student.getYear()),
                 student.getFaculty(),
                 student.getProgram(),
                 student.getStatus()
@@ -132,8 +134,8 @@ public class ViewAllStudents extends CustomPanel {
                 String line;
                 while ((line = br.readLine()) != null) {
                     String[] data = line.split(","); 
-                    if (data.length == 9) {
-                        Student student = new Student(data[0], data[1], data[2], data[3], Float.parseFloat(data[4]), data[5], data[6], data[7], data[8]);
+                    if (data.length == 10) {
+                        Student student = new Student(data[0], data[1], data[3], data[4], Integer.parseInt(data[6]), data[5], data[7], data[8], data[9], data[2]);
                         
                         try (RandomAccessFile raf = new RandomAccessFile(FILE_PATH, "rw")) {
                         	student.writeStudent(raf);
@@ -147,7 +149,7 @@ public class ViewAllStudents extends CustomPanel {
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error parsing GPA. Please ensure it's a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error parsing Year. Please ensure it's a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

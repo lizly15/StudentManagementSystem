@@ -15,8 +15,9 @@ public class UpdateStudent extends CustomPanel {
     private JTextField nameField;
     private JTextField genderField;
     private JTextField phoneField;
-    private JTextField gpaField;
+    private JTextField yearField;
     private JTextField addressField;
+    private JTextField dobField;
     private JComboBox<String> facultyBox, programBox, statusBox;
 
     public UpdateStudent(CardLayout cardLayout, JPanel mainPanel) {
@@ -35,7 +36,10 @@ public class UpdateStudent extends CustomPanel {
         add(new JLabel("Gender: "), gbc);
 
         gbc.gridy += 2;
-        add(new JLabel("GPA: "), gbc);
+        add(new JLabel("Date of birth: "), gbc);
+        
+        gbc.gridy += 2;
+        add(new JLabel("Year:"), gbc);
         
         gbc.gridy += 2;
         add(new JLabel("Faculty:"), gbc);
@@ -69,8 +73,12 @@ public class UpdateStudent extends CustomPanel {
         add(genderField, gbc);
 
         gbc.gridy += 2;
-        gpaField = new JTextField(15);
-        add(gpaField, gbc);
+        dobField = new JTextField(15);
+        add(dobField, gbc);
+
+        gbc.gridy += 2;
+        yearField = new JTextField(15);
+        add(yearField, gbc);
         
         gbc.gridy += 2;
         facultyBox = new JComboBox<>(loadData("faculty.txt"));
@@ -153,11 +161,12 @@ public class UpdateStudent extends CustomPanel {
                 nameField.setText(student.getName());
                 genderField.setText(student.getGender());
                 phoneField.setText(student.getPhoneNumber());
-                gpaField.setText(String.valueOf(student.getGPA())); // Chuyển đổi sang chuỗi
+                yearField.setText(String.valueOf(student.getYear())); // Chuyển đổi sang chuỗi
                 addressField.setText(student.getAddress());
                 facultyBox.setSelectedItem(student.getFaculty());
                 programBox.setSelectedItem(student.getProgram());
                 statusBox.setSelectedItem(student.getStatus());
+                dobField.setText(student.getDob());
                 return; // Kết thúc tìm kiếm sau khi tìm thấy
             }
         }
@@ -172,23 +181,24 @@ public class UpdateStudent extends CustomPanel {
         String name = nameField.getText().trim();
         String gender = genderField.getText().trim();
         String phone = phoneField.getText().trim();
-        String gpaStr = gpaField.getText().trim();
+        String yearStr = yearField.getText().trim();
         String address = addressField.getText().trim();
+        String dob = dobField.getText().trim();
 
-        if (studentId.isEmpty() || name.isEmpty() || gender.isEmpty() || phone.isEmpty() || gpaStr.isEmpty() || address.isEmpty()) {
+        if (studentId.isEmpty() || name.isEmpty() || gender.isEmpty() || phone.isEmpty() || yearStr.isEmpty() || address.isEmpty() || dob.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
 
-        float gpa; // Đổi sang kiểu float
+        int year; 
         try {
-            gpa = Float.parseFloat(gpaStr); // Chuyển đổi sang float
+            year = Integer.parseInt(yearStr); 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "GPA must be a number.");
             return;
         }
         
-        boolean updated = ls.updateStudentById(new Student(studentId, name, gender, phone, gpa, address, (String) facultyBox.getSelectedItem(), (String) programBox.getSelectedItem(), (String) statusBox.getSelectedItem()));
+        boolean updated = ls.updateStudentById(new Student(studentId, name, gender, phone, year, address, (String) facultyBox.getSelectedItem(), (String) programBox.getSelectedItem(), (String) statusBox.getSelectedItem(), dob));
 
         if (updated) {
             JOptionPane.showMessageDialog(this, "Student information updated successfully.");
@@ -216,8 +226,9 @@ public class UpdateStudent extends CustomPanel {
         nameField.setText("");
         genderField.setText("");
         phoneField.setText("");
-        gpaField.setText("");
+        yearField.setText("");
         addressField.setText("");
+        dobField.setText("");
     }
 
     @Override
